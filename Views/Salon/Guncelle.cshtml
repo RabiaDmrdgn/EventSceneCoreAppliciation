@@ -1,0 +1,47 @@
+﻿@using EntityLayer
+@model Salon
+
+@{
+    ViewData["Title"] = "Guncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="col-11 grid-margin stretch-card">
+    <div class="card m-5" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;">
+        <div class="card-body">
+
+            <h3>Salon Güncelle</h3>
+
+            @using (Html.BeginForm("Guncelle", "Salon", FormMethod.Post, new { @class = "form-group" }))
+            {
+                @Html.TextBox("salonId",Model.salonId,new { @class = "form-control" ,@type="hidden"})
+
+                @Html.Label("Salon Adı")
+                @Html.TextBox("salonAd",Model.salonAd,new { @class = "form-control"})
+                @Html.ValidationMessage("salonAd",new { @class ="text-danger" })
+                <br />
+
+                @Html.Label("Salon Kapasitesi")
+                @Html.TextBox("kapasite",Model.kapasite,new { @class = "form-control"})
+                @Html.ValidationMessage("kapasite",new { @class ="text-danger" })
+                <br />
+
+                @Html.Label("Durum")
+                <select class="form-control" name="silindi">
+                    @if (Model.silindi)
+                    {
+                        <option value="False">Aktif</option>
+                        <option value="True" selected>Pasif</option>
+                    }
+                    else
+                    {
+                        <option value="False" selected>Pasif</option>
+                        <option value="True">Aktif</option>
+                    }
+                </select>
+                <br />
+
+                <input class="form-control btn btn-primary" type="submit" value="Salon Güncelle" />
+            }
+        </div>
+    </div>
+</div>
